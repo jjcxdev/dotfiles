@@ -23,4 +23,4 @@ eval "$(rbenv init -)"
 
 # Terminal options
 # List directories in single column
-alias ls='ls -1 --color=auto -F'
+alias ls='ls -la --color=auto -F'
