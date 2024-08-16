@@ -13,8 +13,8 @@ export LDFLAGS="-L/opt/homebrew/opt/node@20/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/node@20/include"
 
 # Aliases for backup and setup scripts
-alias backup='~/backup_configs/backup_configs.zsh'
-alias setup='~/backup_configs/setup_configs.zsh'
+alias backup='~/.config/dotfile_scripts/backup_configs.zsh'
+alias setup='~/.config/dotfile_scripts/setup_configs.zsh'
 
 # rbenv configuration
 export PATH="$HOME/.rbenv/bin:$PATH"
