@@ -4,6 +4,12 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Map j and k to move by screen lines when wrapping is enabled
+vim.api.nvim_set_keymap('n', 'j', 'gj', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'k', 'gk', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', 'j', 'gj', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', 'k', 'gk', { noremap = true, silent = true })
+
 -- Disable space as a key to prevent unintended behavior
 vim.keymap.set('n', '<space>', '<nop>', { silent = true })
 vim.keymap.set('v', '<space>', '<nop>', { silent = true })
