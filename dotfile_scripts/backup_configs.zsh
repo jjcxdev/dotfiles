@@ -6,6 +6,7 @@ NVIM_CONFIG="$HOME/.config/nvim"
 WEZTERM_CONFIG="$HOME/.wezterm.lua"
 KITTY_SRC="$HOME/.config/kitty"
 SCRIPTS_SRC="$HOME/.config/dotfile_scripts"
+AEROSPACE_CONFIG="$HOME/.aerospace.toml"
 
 # Define backup locations within Git repo
 BACKUP_DIR="$HOME/.config/dotfiles"
@@ -14,6 +15,7 @@ NVIM_BACKUP="$BACKUP_DIR/nvim/"
 WEZTERM_BACKUP="$BACKUP_DIR/wezterm/"
 KITTY_BACKUP="$BACKUP_DIR/kitty/"
 SCRIPTS_BACKUP="$BACKUP_DIR/dotfile_scripts/"
+AEROSPACE_BACKUP="$BACKUP_DIR/aerospace"
 
 # Ensure backup directories exist
 mkdir -p $ZSHRC_BACKUP
@@ -21,6 +23,7 @@ mkdir -p $NVIM_BACKUP
 mkdir -p $WEZTERM_BACKUP
 mkdir -p $KITTY_BACKUP
 mkdir -p $SCRIPTS_BACKUP
+mkdir -p $AEROSPACE_BACKUP
 
 # Backup .zshrc config
 cp $ZSHRC_CONFIG $ZSHRC_BACKUP/.zshrc
@@ -36,6 +39,9 @@ rsync -avh --delete $KITTY_SRC/ $KITTY_BACKUP
 
 # Sync dotfile scripts
 rsync -avh --delete $SCRIPTS_SRC/ $SCRIPTS_BACKUP
+
+# Backup Aerospace config
+cp $AEROSPACE_CONFIG "$AEROSPACE_BACKUP/.aerospace.toml"
 
 # Navigate to backup directory
 cd $BACKUP_DIR
