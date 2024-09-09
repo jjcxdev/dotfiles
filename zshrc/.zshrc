@@ -7,6 +7,12 @@ fi
 
 # User configuration
 
+# alias
+alias n='nvim'
+alias l='ls -la'
+# PATH for Laravel
+export PATH="$PATH:/Users/justinchambers/Herd/bin"
+
 # Set the correct PATH for Node.js LTS version
 export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
 export LDFLAGS="-L/opt/homebrew/opt/node@20/lib"
@@ -46,3 +52,25 @@ alias ls='eza --icons=always -a'
 eval "$(zoxide init zsh)"
 
 alias cd="z"
+
+
+# Herd injected NVM configuration
+export NVM_DIR="/Users/justinchambers/Library/Application Support/Herd/config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+[[ -f "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh" ]] && builtin source "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh"
+
+# Herd injected PHP 8.3 configuration.
+export HERD_PHP_83_INI_SCAN_DIR="/Users/justinchambers/Library/Application Support/Herd/config/php/83/"
+
+
+# Herd injected PHP binary.
+export PATH="/Users/justinchambers/Library/Application Support/Herd/bin/":$PATH
+
+# pnpm
+export PNPM_HOME="/Users/justinchambers/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

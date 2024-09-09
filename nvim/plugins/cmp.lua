@@ -1,46 +1,20 @@
--- ~/.config/nvim/plugins/cmp.lua
-
 return {
-    -- Add nvim-cmp and dependencies
     "hrsh7th/nvim-cmp",
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-path",
-    "hrsh7th/cmp-cmdline",
-
-    -- Add a snippet engine
-    "hrsh7th/cmp-vsnip",
-    "hrsh7th/vim-vsnip",
-
-    -- For luasnip users
-    -- "L3MON4D3/LuaSnip",
-    -- "saadparwaiz1/cmp_luasnip",
-
-    -- For ultisnips users
-    -- "SirVer/ultisnips",
-    -- "quangnguyen30192/cmp-nvim-ultisnips",
-
-    -- For snippy users
-    -- "dcampos/nvim-snippy",
-    -- "dcampos/cmp-snippy",
-
+    dependencies = {
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
+        "hrsh7th/cmp-cmdline",
+        "hrsh7th/cmp-vsnip",
+        "hrsh7th/vim-vsnip",
+    },
     config = function()
-        -- Set up nvim-cmp.
         local cmp = require'cmp'
-
         cmp.setup({
             snippet = {
-                -- REQUIRED - you must specify a snippet engine
                 expand = function(args)
                     vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-                    -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-                    -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-                    -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
                 end,
-            },
-            window = {
-                -- completion = cmp.config.window.bordered(),
-                -- documentation = cmp.config.window.bordered(),
             },
             mapping = cmp.mapping.preset.insert({
                 ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -52,9 +26,6 @@ return {
             sources = cmp.config.sources({
                 { name = 'nvim_lsp' },
                 { name = 'vsnip' }, -- For vsnip users.
-                -- { name = 'luasnip' }, -- For luasnip users.
-                -- { name = 'ultisnips' }, -- For ultisnips users.
-                -- { name = 'snippy' }, -- For snippy users.
             }, {
                 { name = 'buffer' },
             })
@@ -77,13 +48,5 @@ return {
                 { name = 'cmdline' }
             }),
         })
-
-        -- Set up lspconfig.
-        local capabilities = require('cmp_nvim_lsp').default_capabilities()
-        -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-        require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
-            capabilities = capabilities
-        }
-    end
+    end,
 }
-

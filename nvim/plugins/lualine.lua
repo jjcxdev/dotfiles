@@ -4,10 +4,18 @@ return {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
+
+        -- Define a custom theme with your desired colors
+        local custom_horizon = require'lualine.themes.horizon'
+
+        -- Modify the colors for the modes
+        custom_horizon.normal.a.bg = '#EA33F7'   -- Purple for normal mode
+        custom_horizon.insert.a.bg = '#5EC26A'   -- Green for insert mode
+        custom_horizon.visual.a.bg = '#5BC5FA'   -- Cyan for visual mode
         require('lualine').setup {
             options = {
                 icons_enabled = true,
-                theme = 'horizon',
+                theme = custom_horizon,
                 component_separators = { left = '', right = ''},
                 section_separators = { left = '', right = ''},
                 disabled_filetypes = {
