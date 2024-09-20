@@ -47,7 +47,4 @@ backup_and_update "$REPO_DIR/kitty" "$HOME/.config/kitty"
 echo "Setting up dotfile scripts..."
 backup_and_update "$REPO_DIR/dotfile_scripts" "$HOME/.config/dotfile_scripts"
 
-echo "Setting up Aerospace config..."
-backup_and_update "$REPO_DIR/aerospace/.aerospace.toml" "$HOME/.aerospace.toml"
-
 echo "Configs updated."

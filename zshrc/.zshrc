@@ -10,6 +10,11 @@ fi
 # alias
 alias n='nvim'
 alias l='ls -la'
+
+alias ga="git add ."
+alias gc="git commit -m"
+alias gp="git push"
+
 # PATH for Laravel
 export PATH="$PATH:/Users/justinchambers/Herd/bin"
 
