@@ -47,8 +47,8 @@ config.colors = {
     }
 }
 
-config.window_background_opacity = 0.8
-config.macos_window_background_blur = 25
+-- config.window_background_opacity = 0.8
+-- config.macos_window_background_blur = 25
 
 config.use_fancy_tab_bar = false
 

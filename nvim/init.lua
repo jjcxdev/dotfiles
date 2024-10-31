@@ -1,5 +1,3 @@
--- init.lua
-
 local opt = vim.opt
 
 -- General settings
@@ -17,14 +15,21 @@ opt.clipboard = 'unnamedplus'
 -- Enable true color support
 opt.termguicolors = true
 
+-- Set color column at 80 characters globally
+vim.opt.colorcolumn = "80"
+
+-- Set color column highlight explicitly
+vim.cmd([[highlight ColorColumn guibg=#2a2a2a]])
+
 -- Set Neovim background to be transparent
-vim.cmd [[
+vim.cmd([[
   highlight Normal guibg=NONE ctermbg=NONE
   highlight NonText guibg=NONE ctermbg=NONE
   highlight LineNr guibg=NONE ctermbg=NONE
   highlight Folded guibg=NONE ctermbg=NONE
   highlight EndOfBuffer guibg=NONE ctermbg=NONE
-]]
+  highlight ColorColumn guibg=#2a2a2a
+]])
 
 -- Remove tilde from end of buffer
 opt.fillchars = {eob = " "}
@@ -77,4 +82,3 @@ package.path = config_path .. package.path
 require('config.autocmds')
 require('config.general')
 require('config.lazy')
-

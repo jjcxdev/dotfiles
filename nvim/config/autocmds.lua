@@ -1,5 +1,3 @@
---- config/autocmds.lua
-
 local cmd = vim.cmd
 
 -- Highlight yanked text
@@ -15,3 +13,4 @@ cmd([[
     autocmd BufWritePre *.js, *.ts, *.jsx, *.tsx, *.css, *.scss, *.html, *.json, *.md lua vim.lsp.buf.format({ async = true })
   augroup END
 ]])
+

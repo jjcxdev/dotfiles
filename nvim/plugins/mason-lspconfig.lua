@@ -18,18 +18,33 @@ return {
         local lspconfig = require('lspconfig')
         local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-        -- Automatically setup any servers installed via Mason
-        require("mason-lspconfig").setup_handlers({
-            function(server_name)
-                if lspconfig[server_name] then
-                    lspconfig[server_name].setup({
-                        capabilities = capabilities,
-                    })
-                else
-                    print("Warning: LSP server " .. server_name .. " not found.")
-                end
-            end,
-        })
+    -- Automatically setup any servers installed via Mason
+    require("mason-lspconfig").setup_handlers({
+        function(server_name)
+            if server_name == "lua_ls" then
+                lspconfig.lua_ls.setup({
+                    capabilities = capabilities,
+                    settings = {
+                        Lua = {
+                            diagnostics = {
+                                globals = { 'vim' },  -- Recognize 'vim' as a global variable
+                            },
+                            workspace = {
+                                library = {
+                                    [vim.fn.expand('$VIMRUNTIME/lua')] = true,  -- Make Neovim runtime files visible
+                                    [vim.fn.stdpath('config') .. '/lua'] = true, -- Your Neovim config files
+                                },
+                            },
+                        },
+                    },
+                })
+            else
+                lspconfig[server_name].setup({
+                    capabilities = capabilities,
+                })
+            end
+        end,
+    })
 
     -- null-ls formatting
     local null_ls = require("null-ls")
