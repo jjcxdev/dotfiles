@@ -16,31 +16,31 @@ KITTY_BACKUP="$BACKUP_DIR/kitty/"
 SCRIPTS_BACKUP="$BACKUP_DIR/dotfile_scripts/"
 
 # Ensure backup directories exist
-mkdir -p $ZSHRC_BACKUP
-mkdir -p $NVIM_BACKUP
-mkdir -p $WEZTERM_BACKUP
-mkdir -p $KITTY_BACKUP
-mkdir -p $SCRIPTS_BACKUP
+mkdir -p "$ZSHRC_BACKUP" "$NVIM_BACKUP" "$WEZTERM_BACKUP" "$KITTY_BACKUP" "$SCRIPTS_BACKUP"
 
 # Backup .zshrc config
-cp $ZSHRC_CONFIG $ZSHRC_BACKUP/.zshrc
+cp "$ZSHRC_CONFIG" "$ZSHRC_BACKUP/.zshrc" || { echo "Failed to backup .zshrc"; exit 1; }
 
 # Sync Neovim config
-rsync -avh --delete $NVIM_CONFIG/ $NVIM_BACKUP
+rsync -avh --delete "$NVIM_CONFIG/" "$NVIM_BACKUP" || { echo "Failed to sync Neovim config"; exit 1; }
 
 # Sync WezTerm config
-cp $WEZTERM_CONFIG $WEZTERM_BACKUP/.wezterm.lua
+cp "$WEZTERM_CONFIG" "$WEZTERM_BACKUP/.wezterm.lua" || { echo "Failed to backup WezTerm config"; exit 1; }
 
 # Sync Kitty config
-rsync -avh --delete $KITTY_SRC/ $KITTY_BACKUP
+rsync -avh --delete "$KITTY_SRC/" "$KITTY_BACKUP" || { echo "Failed to sync Kitty config"; exit 1; }
 
 # Sync dotfile scripts
-rsync -avh --delete $SCRIPTS_SRC/ $SCRIPTS_BACKUP
+rsync -avh --delete "$SCRIPTS_SRC/" "$SCRIPTS_BACKUP" || { echo "Failed to sync dotfile scripts"; exit 1; }
 
 # Navigate to backup directory
-cd $BACKUP_DIR
+cd "$BACKUP_DIR" || { echo "Failed to navigate to backup directory"; exit 1; }
 
-# Git operation
-git add .
-git commit -m "Auto-Updated configs backup"
-git push origin main
+# Git operations with check for changes
+if [[ -n $(git status --porcelain) ]]; then
+    git add .
+    git commit -m "Auto-Updated configs backup"
+    git push origin main || { echo "Failed to push changes to Git"; exit 1; }
+else
+    echo "No changes to commit."
+fi
